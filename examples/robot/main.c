@@ -1,4 +1,15 @@
-// serialio - This program prompts the user with text which explains what the code is doing.
+// Comments for Developers
+// This program prompts the user with text which explains what the code is doing.
+// The robot arm has four different variables:
+// command(cmd)
+// motor(motor)
+// distance(dis)
+//direction(dis)
+// What each command does:
+// cmd - Command for moving motor
+// motor - Determines part of robot being moved
+// dir - Direction such as, up/dn rt/lt
+// dis - Enter number for distance traveled on the arm
 // STRTOK() is the code that points to the first character of the untokenized portion(the portion before the string is seperated)
 
 #include <stdio.h>
@@ -15,22 +26,16 @@
 #define max_dir_len 3 //up/dn rt/lt
 #define max_dis_len 5 // up to 9999+1
 
-
-//puts("Array for movement instructions");
-//printf("Enter number for movement of arm");
-//printf("For users");
-
-
 int main(void) {    
 
     init_serial();
     char input[MAX_BUFFER + 1] = {};
     char delims[MAX_DELIMS + 1] = {" ,."};
 
-    puts("Serial I/O Test: readLine with tokens");
-    printf("Enter text up to %i characters, or end w/ CR\n", MAX_BUFFER);
-    printf("Line will be parsed into tokens\n");
-    printf("Possible delimitors are (w/ ASCII code): ");
+    puts("Program for movement of robot arm with tokens");
+    printf("Enter text up to %i characters, or end w/ CR\n for what cmd or joint will equal", MAX_BUFFER);
+    printf("Pointer will be established and creates tokens\n");
+    printf("Tokens established are: %i");
     for (uint8_t delim=0; delim < MAX_DELIMS; delim++)
     {
         printf("'%c' 0x%x ", delims[delim], delims[delim]);
@@ -63,7 +68,6 @@ int main(void) {
         printf("%5i %s\n", index, tokens[index]);
 
     }
-    puts("Command for moving motor");
     // cmd - Command for moving motor
     char cmd[max_cmd_len] = {};
     strncpy(cmd, tokens[0], max_cmd_len);
@@ -84,5 +88,3 @@ int main(void) {
     strncpy(dis, tokens[3], max_dis_len);
     printf("Distance is: %s\n", dis);
 }
-
-
